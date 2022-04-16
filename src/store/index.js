@@ -119,7 +119,7 @@ export default new Vuex.Store({
     initInfo(state, newInfo) {
 
       
-      state.currentCertificateAmount.$delete()
+      // state.currentCertificateAmount.$delete()
       state.currentCertificateAmount.push(newInfo)
 
 
