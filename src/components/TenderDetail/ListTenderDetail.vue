@@ -17,26 +17,26 @@ export default {
 
   mounted() {
 
-      let initInfo = {
-        id: 1,
-        name: "投標案資訊 :",
-        children: [
-          { id: 1.1, name: "標案名稱 :" + ` ${this.$route.query.title}` },
-          { id: 1.2, name: "標案案號 :" + ` ${this.$route.query.id}` },
-          { id: 1.3, name: "標案金額 :" + ` ${this.$route.query.amount}` },
-          { id: 1.4, name: "招標日期 :" + ` ${this.$route.query.relaseDate}` },
-          {
-            id: 1.5,
-            name: "決標日期 :" + ` ${this.$route.query.terminationDate}`,
-          },
-        ],
-      };
-      this.$store.commit("initInfo", initInfo);
-      let initInfoTwo = {
-        id: 2,
-        name: "現有憑證金額 : " + 0,
-      };
-      this.$store.commit("initInfo", initInfoTwo);
+      // let initInfo = {
+      //   id: 1,
+      //   name: "投標案資訊 :",
+      //   children: [
+      //     { id: 1.1, name: "標案名稱 :" + ` ${this.$route.query.title}` },
+      //     { id: 1.2, name: "標案案號 :" + ` ${this.$route.query.id}` },
+      //     { id: 1.3, name: "標案金額 :" + ` ${this.$route.query.amount}` },
+      //     { id: 1.4, name: "招標日期 :" + ` ${this.$route.query.relaseDate}` },
+      //     {
+      //       id: 1.5,
+      //       name: "決標日期 :" + ` ${this.$route.query.terminationDate}`,
+      //     },
+      //   ],
+      // };
+      // this.$store.commit("initInfo", initInfo);
+      // let initInfoTwo = {
+      //   id: 2,
+      //   name: "現有憑證金額 : " + 0,
+      // };
+      // this.$store.commit("initInfo", initInfoTwo);
     
   },
   components: {

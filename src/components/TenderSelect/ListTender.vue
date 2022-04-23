@@ -2,7 +2,7 @@
   <v-list class="pt-0" two-line flat>
     <v-list-item-group
       multiple
-      v-for="tender in $store.state.tenders"
+      v-for="tender in tenders"
       :key="tender.id"
     >
       <v-list-item  @click="listDetail(tender.id, tender.title, tender.amount, tender.relaseDate, tender.terminationDate)">
@@ -20,7 +20,13 @@
 
 <script>
 import router from '../../router'
+import axios from 'axios';
 export default {
+  data() {
+    return {
+      tenders: []
+    };
+  },
   methods: {
     listDetail(id, title, amount, relaseDate, terminationDate) {
       let passData = {
@@ -46,6 +52,17 @@ export default {
       })
     },
   },
+  mounted(){
+    axios.get('http://localhost:3000/tenderquery',{
+     
+    })
+    .then(resp => {
+      console.log(resp)
+     this.tenders = resp.data.tender
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 };
 </script>
 
