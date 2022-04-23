@@ -53,7 +53,7 @@ export default {
     },
   },
   mounted(){
-    axios.get('http://localhost:3000/tenderquery',{
+    axios.get('https://tender-backend.fishlab.com.tw/tenderquery',{
      
     })
     .then(resp => {
