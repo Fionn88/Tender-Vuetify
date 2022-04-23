@@ -51,8 +51,8 @@ export default {
     },
   },
   mounted() {
-    this.tenderAmount = parseFloat(this.$route.query.amount.replace(/,/g, "")),
-      console.log(this.$route.query.amount);
+    // this.tenderAmount = parseFloat(this.$route.query.amount.replace(/,/g, "")),
+    //   console.log(this.$route.query.amount);
 
   },
   computed(){
