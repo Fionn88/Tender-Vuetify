@@ -3,7 +3,7 @@
     <v-treeview
       open-all
       :items="this.initInfo"
-      :key="this.$store.state.currentCertificateAmount.id"
+      :key="this.id"
     ></v-treeview>
     <div class="TenderDetail pa-6">
       <button-tender />
@@ -16,11 +16,13 @@ export default {
   name: "TenderDetail",
   data() {
     return {
-      initInfo: []
+      initInfo: [],
+      id: ""
     };
   },
 
   mounted() {
+    this.id = this.$route.query.id,
     this.initInfo= [
         {
           id: 1,

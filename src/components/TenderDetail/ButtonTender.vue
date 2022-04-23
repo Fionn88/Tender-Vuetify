@@ -51,14 +51,11 @@ export default {
     },
   },
   mounted() {
-    // this.tenderAmount = parseFloat(this.$route.query.amount.replace(/,/g, "")),
-    //   console.log(this.$route.query.amount);
-
+    this.tenderAmount = this.$route.query.amount
   },
-  computed(){
-    certificateAmount = this.$store.state.currentCertificateAmount
-    console.log("certificateAmount: "+certificateAmount)
-  },
+  // computed: {
+  //   certificateAmount: this.$store.state.currentCertificateAmount
+  // },
   components: {
     "dialog-warning":
       require("@/components/TenderDetail/Dialog/DialogWarning.vue").default,
