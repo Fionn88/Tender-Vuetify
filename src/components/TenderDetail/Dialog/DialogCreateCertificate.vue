@@ -83,9 +83,6 @@
           >
             Save
           </v-btn>
-          <v-btn color="blue darken-1" text @click="refresh">
-            refresh
-          </v-btn>
         </v-card-actions>
         
       </v-card>
