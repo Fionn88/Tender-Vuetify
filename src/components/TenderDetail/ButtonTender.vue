@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-bottom" :value="true">
+  <div class="fixed-bottom " :value="true">
     <v-row align="center" justify="space-around" >
       <v-btn @click="createClick()">創建憑證</v-btn>
       <!-- ----------------------- -->
@@ -17,7 +17,7 @@
       v-if="dialogs.create"
       @close="dialogs.create = false"
     />
-    <list-certificate />
+    
   </div>
 </template>
 
