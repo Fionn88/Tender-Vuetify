@@ -100,11 +100,10 @@ export default {
       bankAmount: "",
       tenderAmount: "",
       certificateAmont: "",
-      res: "",
       rules: [(value) => !!value || "Required."],
       amountRules: [
         (value) => !!value || "Required.",
-        (value) => value <= Number(this.tenderAmount),
+        (value) => value <= Number(this.tenderAmount) - Number(this.certificateAmont),
       ],
       accountRules: [
         (value) => !!value || "Required.",
@@ -132,22 +131,16 @@ export default {
 
       this.$store.commit("addCertificate", newCertificate);
       this.$emit("close");
+      
     },
-  },
-  mounted() {
-    this.tenderAmount = parseFloat(this.$route.query.amount.replace(/,/g, ""));
   },
   computed: {
     inputInvaild() {
-      this.certificateAmont = this.$store.state.currentCertificateAmount.name
-      if(this.certificateAmont === undefined){
-        this.res = 0
-      }else{
-        this.res = this.certificateAmont.replace(/\D/g, "");
-      }
+      this.tenderAmount = this.$route.query.amount
+      this.certificateAmont = this.$store.state.currentCertificateAmount
       
-      console.log(this.res)
-      console.log(Number(this.tenderAmount) - Number(this.res))
+      // console.log(this.res)
+      // console.log(Number(this.tenderAmount) - Number(this.res))
       return (
         this.bankCode.trim() === "" ||
         this.bankAccount.trim() === "" ||
@@ -155,9 +148,9 @@ export default {
         this.bankCurrecy.trim() === "" ||
         this.branchName.trim() === "" ||
         this.bankAmount.trim() === "" ||
-        Number(this.bankAmount) > Number(this.tenderAmount) ||
+        Number(this.bankAmount) > Number(this.tenderAmount)  - Number(this.certificateAmont) ||
         // Number(this.bankAmount) > Number(this.tenderAmount) - Number(this.certificateAmont) ||
-        Number(this.bankAmount) < 1 
+        Number(this.bankAmount) < 1
         
       );
     

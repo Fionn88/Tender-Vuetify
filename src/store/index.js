@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     certificates: [],
-    currentCertificateAmount: [],
+    currentCertificateAmount: 0,
     banks: ["004 臺灣銀行",
       "005 臺灣土地銀行",
       "006 合作金庫商業銀行",
@@ -61,36 +61,40 @@ export default new Vuex.Store({
     addCertificate(state, newCertificate) {
       state.certificates.push(newCertificate)
 
-      console.log(state.currentCertificateAmount)
-      var getString = ""
+      // console.log(state.currentCertificateAmount)
+      // var getString = ""
 
-      state.currentCertificateAmount = state.currentCertificateAmount.filter(currentCertificateAmount =>
-        getString = currentCertificateAmount.name)
-      var res = getString.replace(/\D/g, "");
+      // state.currentCertificateAmount = state.currentCertificateAmount.filter(currentCertificateAmount =>
+      //   getString = currentCertificateAmount.name)
+      // var res = getString.replace(/\D/g, "");
 
-      console.log(res)
-
-      var current = Number(res) + Number(newCertificate.amount)
-      state.currentCertificateAmount = state.currentCertificateAmount.filter(currentCertificateAmount =>
-        currentCertificateAmount.id !== 2)
-
-
-
-
-      let initInfoTwo = {
-        id: 2,
-        name: "您的個人資訊 :" + current,
-      };
-
-      state.currentCertificateAmount.push(initInfoTwo)
-
-
-    },
-    initInfo(state, newInfo) {
+      // console.log(res)
 
       
-      // state.currentCertificateAmount.$delete()
-      state.currentCertificateAmount.push(newInfo)
+      // state.currentCertificateAmount = state.currentCertificateAmount.filter(currentCertificateAmount =>
+      //   currentCertificateAmount.id !== 2)
+
+
+
+
+      // let initInfoTwo = {
+      //   id: 2,
+      //   name: "您的個人資訊 :" + current,
+      // };
+      if(state.currentCertificateAmount == 0){
+        var currentInt = Number(newCertificate.amount)
+        state.currentCertificateAmount += currentInt
+        console.log("currentCertificateAmount: "+state.currentCertificateAmount)
+      }else{
+        var current = Number(newCertificate.amount)
+        state.currentCertificateAmount += current
+        console.log("currentCertificateAmount: "+state.currentCertificateAmount)
+      }
+      
+      
+
+      
+      
 
 
     }

@@ -40,7 +40,7 @@ export default {
       if (tenderAmount > certificateAmount) {
         this.dialogs.warning = true;
         console.log("this.dialogs.warning: " + this.dialogs.warning);
-      } else if (tenderAmount === certificateAmount) {
+      } else if (tenderAmount == certificateAmount) {
         this.dialogs.apply = true;
         console.log("this.dialogs.apply: " + this.dialogs.apply);
       }
@@ -52,10 +52,8 @@ export default {
   },
   mounted() {
     this.tenderAmount = this.$route.query.amount
+    this.certificateAmount = this.$store.state.currentCertificateAmount
   },
-  // computed: {
-  //   certificateAmount: this.$store.state.currentCertificateAmount
-  // },
   components: {
     "dialog-warning":
       require("@/components/TenderDetail/Dialog/DialogWarning.vue").default,
