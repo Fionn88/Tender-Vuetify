@@ -69,6 +69,7 @@
           </v-container>
           <small>*indicates required field</small>
         </v-card-text>
+        
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="$emit('close')">
@@ -82,7 +83,11 @@
           >
             Save
           </v-btn>
+          <v-btn color="blue darken-1" text @click="refresh">
+            refresh
+          </v-btn>
         </v-card-actions>
+        
       </v-card>
     </v-dialog>
   </v-row>
@@ -90,6 +95,13 @@
 
 <script>
 export default {
+  name: 'refresh',
+    inject: ['reload'],
+    methods: {
+          refresh () {
+              this.reload()
+          }
+    },
   data() {
     return {
       bankCode: "",
@@ -132,6 +144,7 @@ export default {
 
       this.$store.commit("addCertificate", newCertificate);
       this.$emit("close");
+      this.reload();
       
     },
   },
