@@ -61,26 +61,6 @@ export default new Vuex.Store({
     addCertificate(state, newCertificate) {
       state.certificates.push(newCertificate)
 
-      // console.log(state.currentCertificateAmount)
-      // var getString = ""
-
-      // state.currentCertificateAmount = state.currentCertificateAmount.filter(currentCertificateAmount =>
-      //   getString = currentCertificateAmount.name)
-      // var res = getString.replace(/\D/g, "");
-
-      // console.log(res)
-
-      
-      // state.currentCertificateAmount = state.currentCertificateAmount.filter(currentCertificateAmount =>
-      //   currentCertificateAmount.id !== 2)
-
-
-
-
-      // let initInfoTwo = {
-      //   id: 2,
-      //   name: "您的個人資訊 :" + current,
-      // };
       if(state.currentCertificateAmount == 0){
         var currentInt = Number(newCertificate.amount)
         state.currentCertificateAmount += currentInt
@@ -90,12 +70,6 @@ export default new Vuex.Store({
         state.currentCertificateAmount += current
         console.log("currentCertificateAmount: "+state.currentCertificateAmount)
       }
-      
-      
-
-      
-      
-
 
     }
   },

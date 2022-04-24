@@ -100,10 +100,11 @@ export default {
       bankAmount: "",
       tenderAmount: "",
       certificateAmont: "",
+      res: "",
       rules: [(value) => !!value || "Required."],
       amountRules: [
         (value) => !!value || "Required.",
-        (value) => value <= Number(this.tenderAmount) - Number(this.certificateAmont),
+        (value) => value <= Number(this.tenderAmount) - Number(this.certificateAmont) || "不能高於" + this.res,
       ],
       accountRules: [
         (value) => !!value || "Required.",
@@ -158,6 +159,9 @@ export default {
       // return Number(this.bankAmountChange) < 0 || Number(this.bankAmountChange) > Number(this.tenderAmountChange)
     },
   },
+  mounted(){
+    this.res =  Number(this.tenderAmount) - Number(this.certificateAmont).toString()
+  }
 };
 </script>
 

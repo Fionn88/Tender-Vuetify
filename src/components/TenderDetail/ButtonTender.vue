@@ -40,7 +40,7 @@ export default {
       if (tenderAmount > certificateAmount) {
         this.dialogs.warning = true;
         console.log("this.dialogs.warning: " + this.dialogs.warning);
-      } else if (tenderAmount == certificateAmount) {
+      } else if (tenderAmount === certificateAmount) {
         this.dialogs.apply = true;
         console.log("this.dialogs.apply: " + this.dialogs.apply);
       }
