@@ -23,15 +23,38 @@ import axios from "axios";
 export default {
   data() {
     return {
-      certificate: [],
+      step: "",
+      certificates: this.$store.state.certificates,
     };
   },
   methods: {
     addCertificate() {
       // console.log(Object.keys(this.certificate).length);
-      Object.keys(this.certificate)
+      Object.keys(this.certificates)
         .filter((k, i) => i >= 100 && i < 300)
-        .forEach((k) => console.log(this.certificate[k]));
+        .forEach((k) => console.log(this.certificates[k]));
+
+      console.log("addCertificate");
+      console.log(this.certificates);
+      console.log(this.$store.state.certificates);
+
+      for (
+        let index = 0;
+        index < Object.keys(this.certificates).length ;
+        ++index
+      ) {
+        const element = this.certificates[index];
+        console.log(element);
+        axios.get('https://tender-backend.fishlab.com.tw/tenderquery',{
+        })
+        .then(resp => {
+          console.log(resp)
+        this.tenders = resp.data.tender
+        }).catch(err => {
+          console.log(err);
+        })
+      }
+
       // for (
       //   let index = 0;
       //   index < Object.keys(this.certificate).length + 1;
@@ -59,7 +82,11 @@ export default {
       //   });
     },
     mounted() {
-      this.certificate = this.$store.state.certificate;
+      this.certificates = this.$store.state.certificates;
+      this.step = "mounted";
+      console.log(this.step);
+      console.log(this.certificates);
+      console.log(this.$store.state.certificates);
     },
   },
 };
