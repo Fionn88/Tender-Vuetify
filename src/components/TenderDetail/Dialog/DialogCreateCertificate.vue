@@ -109,11 +109,11 @@ export default {
       bankAmount: "",
       tenderAmount: "",
       certificateAmont: "",
-      res: "",
+      notifyNumber: "",
       rules: [(value) => !!value || "Required."],
       amountRules: [
         (value) => !!value || "Required.",
-        (value) => value <= Number(this.tenderAmount) - Number(this.certificateAmont) || "不能高於" + this.res,
+        (value) => value <= Number(this.tenderAmount) - Number(this.certificateAmont) || "不能高於" + this.notifyNumber,
       ],
       accountRules: [
         (value) => !!value || "Required.",
@@ -122,6 +122,7 @@ export default {
       branchRules:[
         (value) => !!value || "Required.",
         (value) => (value || "").length == 4 || "Must 4 characters",
+        (value) => value > 0 || "沒有此分行號" ,
       ]
     };
   },
@@ -129,7 +130,7 @@ export default {
     addCertificate() {
       let newCertificate = {
         id:
-          Date.now() + this.$route.query.id + this.bankCode + this.bankAccount,
+          Date.now() + this.$route.query.id + this.bankCode.substr(0,3) +this.bankAccount,
         code: this.bankCode.substr(0,3),
         account: this.bankAccount.replace(/ /g,'').padStart(14, '0'),
         name: this.bankName.replace(/ /g,''),
@@ -150,8 +151,6 @@ export default {
       this.tenderAmount = this.$route.query.amount
       this.certificateAmont = this.$store.state.currentCertificateAmount
       
-      // console.log(this.res)
-      // console.log(Number(this.tenderAmount) - Number(this.res))
       return (
         this.bankCode.trim() === "" ||
         this.bankAccount.trim() === "" ||
@@ -160,17 +159,16 @@ export default {
         this.branchName.trim() === "" ||
         this.bankAmount.trim() === "" ||
         Number(this.bankAmount) > Number(this.tenderAmount)  - Number(this.certificateAmont) ||
-        // Number(this.bankAmount) > Number(this.tenderAmount) - Number(this.certificateAmont) ||
-        Number(this.bankAmount) < 1
+        Number(this.bankAmount) < 1 ||
+        Number(this.branchName) < 1
         
       );
     
 
-      // return Number(this.bankAmountChange) < 0 || Number(this.bankAmountChange) > Number(this.tenderAmountChange)
     },
   },
   mounted(){
-    this.res =  Number(this.tenderAmount) - Number(this.certificateAmont).toString()
+    this.notifyNumber =  Number(this.tenderAmount) - Number(this.certificateAmont).toString()
   }
 };
 </script>

@@ -12,7 +12,7 @@
 
         <!-- ------------------------------------------------------------- -->
         <!-- call API To Bank -->
-        <v-btn color="green darken-1" text @click="addCertificate"> Yes </v-btn>
+        <v-btn color="green darken-1" text @click="insertCertificate"> Yes </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -23,23 +23,51 @@ import axios from "axios";
 export default {
   data() {
     return {
-      certificate: [],
+      certificates: this.$store.state.certificates
     };
   },
   methods: {
-    addCertificate() {
-      // console.log(Object.keys(this.certificate).length);
-      Object.keys(this.certificate)
+    insertCertificate() {
+      Object.keys(this.certificates)
         .filter((k, i) => i >= 100 && i < 300)
-        .forEach((k) => console.log(this.certificate[k]));
-      // for (
-      //   let index = 0;
-      //   index < Object.keys(this.certificate).length + 1;
-      //   ++index
-      // ) {
-      //   const element = this.certificate[index];
-      //   console.log(element);
-      // }
+        .forEach((k) => console.log(this.certificates[k]));
+
+      console.log("addCertificate");
+      console.log("certificates: "+this.certificates);
+      console.log(this.certificates);
+      console.log("store: "+this.$store.state.certificates);
+      console.log(this.$store.state.certificates);
+
+      for (
+        let index = 0;
+        index < Object.keys(this.certificates).length ;
+        ++index
+      ) {
+        const element = this.certificates[index];
+        console.log("element: "+element);
+        console.log(element);
+        console.log(element.tendersID)
+        wait(5000)
+        axios.post("https://tender-backend.fishlab.com.tw/createCertificate", {
+          tenderid: element.tendersID,
+          accountCode: element.code,
+          account: element.account,     
+          name: element.name,
+          currency: element.accountCurrecy,
+          branch: element.branchName,
+          amount: element.amount,
+
+        })
+        .then(function (response) {
+          console.log("resp: "+response)
+          console.log(response)
+        // this.tenders = resp.data.tender
+        }).catch(err => {
+          console.log("err")
+          console.log(err);
+        })
+      }
+
       // axios
       //   .post("http://127.0.0.1:3000/createCertificate", {
       //     tenderid: "NCHC-P-106104",
@@ -57,10 +85,7 @@ export default {
       //   .catch(function (error) {
       //     console.log(error);
       //   });
-    },
-    mounted() {
-      this.certificate = this.$store.state.certificate;
-    },
+    }
   },
 };
 </script>

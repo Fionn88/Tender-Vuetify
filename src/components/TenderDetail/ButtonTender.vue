@@ -1,7 +1,9 @@
 <template>
   <div class="fixed-bottom " :value="true">
-    <v-row align="center" justify="space-around" >
-      <v-btn @click="createClick()">創建憑證</v-btn>
+    <v-row align="end" justify="end" >
+      <v-btn 
+      color="primary"
+      @click="createClick()">創建憑證</v-btn>&nbsp;
       <!-- ----------------------- -->
       <!-- 創建憑證後加起來的數字塞進 sureClick 的第二個參數 -->
       <v-btn
@@ -40,7 +42,7 @@ export default {
       if (tenderAmount > certificateAmount) {
         this.dialogs.warning = true;
         console.log("this.dialogs.warning: " + this.dialogs.warning);
-      } else if (tenderAmount === certificateAmount) {
+      } else if (tenderAmount == certificateAmount) {
         this.dialogs.apply = true;
         console.log("this.dialogs.apply: " + this.dialogs.apply);
       }
