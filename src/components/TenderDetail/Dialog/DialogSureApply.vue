@@ -27,7 +27,7 @@ export default {
     };
   },
   methods: {
-    insertCertificate() {
+    async insertCertificate() {
       Object.keys(this.certificates)
         .filter((k, i) => i >= 100 && i < 300)
         .forEach((k) => console.log(this.certificates[k]));
@@ -35,56 +35,56 @@ export default {
       console.log("addCertificate");
       console.log("certificates: "+this.certificates);
       console.log(this.certificates);
-      console.log("store: "+this.$store.state.certificates);
-      console.log(this.$store.state.certificates);
 
-      for (
-        let index = 0;
-        index < Object.keys(this.certificates).length ;
-        ++index
-      ) {
-        const element = this.certificates[index];
-        console.log("element: "+element);
-        console.log(element);
-        console.log(element.tendersID)
-        wait(5000)
-        axios.post("https://tender-backend.fishlab.com.tw/createCertificate", {
-          tenderid: element.tendersID,
-          accountCode: element.code,
-          account: element.account,     
-          name: element.name,
-          currency: element.accountCurrecy,
-          branch: element.branchName,
-          amount: element.amount,
+      axios.post("http://127.0.0.1:3000/createCertificateMuti", {
+          data: this.certificates,
 
         })
         .then(function (response) {
           console.log("resp: "+response)
           console.log(response)
-        // this.tenders = resp.data.tender
+          this.$emit("close");
+          // let newState = {};
+          // Object.keys(this.certificates).forEach(key => {
+          //   newState[key] = null; // or = initialState[key]
+          //   });
+          //   this.$store.replaceState(newState);
+
         }).catch(err => {
           console.log("err")
           console.log(err);
         })
-      }
 
-      // axios
-      //   .post("http://127.0.0.1:3000/createCertificate", {
-      //     tenderid: "NCHC-P-106104",
-      //     accountCode: "000",
-      //     account: "00000000000000",
-      //     name: "王小明",
-      //     currency: "台幣",
-      //     branch: "1234",
-      //     amount: 49000000,
+// 使用多重迴圈的方式，已棄用
+      // for (
+      //   let index = 0;
+      //   index < Object.keys(this.certificates).length ;
+      //   ++index
+      // ) {
+      //   const element = this.certificates[index];
+      //   console.log("element: "+element);
+      //   console.log(element);
+      //   console.log(element);
+        // console.log(element.tendersID)
+      //   axios.post("http://127.0.0.1:3000/createCertificate", {
+          // tenderid: element.tendersID,
+          // accountCode: element.code,
+          // account: element.account,     
+          // name: element.name,
+          // currency: element.accountCurrecy,
+          // branch: element.branchName,
+          // amount: element.amount,
+
       //   })
       //   .then(function (response) {
-      //     console.log(response);
-      //     this.$emit("close");
+      //     console.log("resp: "+response)
+      //     console.log(response)
+      //   }).catch(err => {
+      //     console.log("err")
+      //     console.log(err);
       //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
+      // }
+
     }
   },
 };
