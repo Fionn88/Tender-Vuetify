@@ -36,7 +36,7 @@ export default {
       console.log("certificates: "+this.certificates);
       console.log(this.certificates);
 
-      axios.post("http://127.0.0.1:3000/createCertificateMuti", {
+      axios.post("https://tender-backend.fishlab.com.tw/createCertificateMuti", {
           data: this.certificates,
 
         })
