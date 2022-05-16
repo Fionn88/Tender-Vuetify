@@ -1,26 +1,41 @@
 <template>
-  <div class="fixed-bottom " :value="true">
-    <v-row align="end" justify="end" >
-      <v-btn 
-      color="primary"
-      @click="createClick()">創建憑證</v-btn>&nbsp;
-      <!-- ----------------------- -->
-      <!-- 創建憑證後加起來的數字塞進 sureClick 的第二個參數 -->
-      <v-btn
-        color="primary"
-        @click="sureClick(tenderAmount, certificateAmount)"
-      >
-        確認
-      </v-btn>
-      <dialog-warning v-if="dialogs.warning" @close="dialogs.warning = false" />
-      <dialog-sure-apply v-if="dialogs.apply" @close="dialogs.apply = false" />
-    </v-row>
+  <b-container>
+    <!-- <div class="fixed-bottom " :value="true"> -->
+    <b-row>
+      <!-- <v-row align="end" justify="end" > -->
+
+      <b-col align-self="start"></b-col>
+
+      <b-col align-self="end">
+        <v-btn color="primary" @click="createClick()">創建憑證</v-btn>&nbsp;
+        <!-- ----------------------- -->
+        <!-- 創建憑證後加起來的數字塞進 sureClick 的第二個參數 -->
+        <v-btn
+          color="primary"
+          @click="sureClick(tenderAmount, certificateAmount)"
+        >
+          確認
+        </v-btn>
+        <dialog-warning
+          v-if="dialogs.warning"
+          @close="dialogs.warning = false"
+        />
+        <dialog-sure-apply
+          v-if="dialogs.apply"
+          @close="dialogs.apply = false"
+        />
+      </b-col>
+
+      <!-- </v-row> -->
+    </b-row>
+
     <dialog-create-certificate
       v-if="dialogs.create"
       @close="dialogs.create = false"
     />
-    
-  </div>
+
+    <!-- </div> -->
+  </b-container>
 </template>
 
 <script>
@@ -53,8 +68,8 @@ export default {
     },
   },
   mounted() {
-    this.tenderAmount = this.$route.query.amount
-    this.certificateAmount = this.$store.state.currentCertificateAmount
+    this.tenderAmount = this.$route.query.amount;
+    this.certificateAmount = this.$store.state.currentCertificateAmount;
   },
   components: {
     "dialog-warning":

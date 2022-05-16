@@ -151,7 +151,7 @@ export default {
     ],
     certificates: [
       // ["創建", "mdi-plus-outline", "/"],
-      ["現有憑證", "mdi-file-outline", "about"],
+      ["現有憑證", "mdi-file-outline", "/CertificateSelect"],
       ["歷史憑證", "mdi-history", "/"],
     ],
     settings: [

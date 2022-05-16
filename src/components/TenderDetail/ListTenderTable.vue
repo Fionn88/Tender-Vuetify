@@ -1,8 +1,7 @@
 <template>
-  <div class="ListTenderTable pa-6">
-    <div class="ListTenderTable pa-6">
+  <div >
       <button-tender />
-    </div>
+
     <v-data-table
       :headers="headers"
       :items="values"
