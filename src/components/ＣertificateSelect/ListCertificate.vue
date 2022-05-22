@@ -13,13 +13,13 @@
 
         <v-row align-v="center">
           <b-col sm>
-            <b-button variant="primary" v-on:click="reveal = true"
+            <b-button variant="primary" v-on:click="showDetail(certificate)"
               >View Certificate details</b-button
             >
           </b-col>
 
           <b-col sm>
-            <b-button variant="primary"> Delete Certificate</b-button>
+            <b-button variant="outline-danger"> Delete Certificate</b-button>
           </b-col>
         </v-row>
       </b-card>
@@ -28,39 +28,37 @@
           v-if="reveal"
           class="transition-fast-in-fast-out v-card--reveal"
           style="height: 100%"
-          v-for="certificate in certificates"
-          v-bind:key="certificate.id"
         >
       
           <v-card-text class="pb-0">
             <p class="text-h4 text--primary">憑證資訊</p>
 
-            <b-card-sub-title class="mb-2">txid: {{ certificate.txid }}</b-card-sub-title>
+            <b-card-sub-title class="mb-2">txid: {{ currentItem.txid }}</b-card-sub-title>
 
             <b-list-group flush>
               <b-list-group-item
-                >標案號： {{ certificate.tenderId }}</b-list-group-item
+                >標案號： {{ currentItem.tenderId }}</b-list-group-item
               >
               <b-list-group-item
-                >銀行帳戶代碼： {{ certificate.accountCode }}</b-list-group-item
+                >銀行帳戶代碼： {{ currentItem.accountCode }}</b-list-group-item
               >
               <b-list-group-item
-                >銀行帳戶： {{ certificate.account }}</b-list-group-item
+                >銀行帳戶： {{ currentItem.account }}</b-list-group-item
               >
               <b-list-group-item>
-                銀行戶名： {{ certificate.name }}</b-list-group-item
+                銀行戶名： {{ currentItem.name }}</b-list-group-item
               >
               <b-list-group-item>
-                銀行帳戶幣別： {{ certificate.currency }}</b-list-group-item
+                銀行帳戶幣別： {{ currentItem.currency }}</b-list-group-item
               >
               <b-list-group-item>
-                銀行分行代號： {{ certificate.branch }}</b-list-group-item
+                銀行分行代號： {{ currentItem.branch }}</b-list-group-item
               >
               <b-list-group-item>
-                憑證金額： {{ certificate.amount }}</b-list-group-item
+                憑證金額： {{ currentItem.amount }}</b-list-group-item
               >
               <b-list-group-item>
-                憑證狀態： {{ certificate.status }}</b-list-group-item
+                憑證狀態： {{ currentItem.status }}</b-list-group-item
               >
             </b-list-group>
           </v-card-text>
@@ -82,11 +80,32 @@ export default {
     return {
       certificates: [],
       reveal: false,
+      currentItem: {
+        id:'',
+        accountCode:'',
+        account: '',
+        name: '',
+        currency: '',
+        branch: '',
+        amount: '',
+        tenderId: '',
+        status: '',
+        txid: ''
+        }
     };
+    
+  },
+  methods: {
+    showDetail(item){
+      this.reveal = true
+      console.log("shoeDetail()")
+      this.currentItem = item
+    }
+
   },
   mounted() {
     axios
-      .get("https://tender-backend.fishlab.com.tw/certificatequery", {})
+      .get("http://127.0.0.1:3000/certificatequery", {})
       .then((resp) => {
         console.log(resp);
         this.certificates = resp.data.certificate;

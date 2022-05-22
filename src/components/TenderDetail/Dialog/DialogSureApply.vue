@@ -12,7 +12,9 @@
 
         <!-- ------------------------------------------------------------- -->
         <!-- call API To Bank -->
-        <v-btn color="green darken-1" text @click="insertCertificate"> Yes </v-btn>
+        <v-btn color="green darken-1" text @click="insertCertificate">
+          Yes
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -21,41 +23,44 @@
 <script>
 import axios from "axios";
 export default {
+  inject: ["reload"],
+
   data() {
     return {
-      certificates: this.$store.state.certificates
+      certificates: this.$store.state.certificates,
     };
   },
   methods: {
-    async insertCertificate() {
+    refresh() {
+      this.reload();
+    },
+    insertCertificate() {
       Object.keys(this.certificates)
         .filter((k, i) => i >= 100 && i < 300)
         .forEach((k) => console.log(this.certificates[k]));
 
       console.log("addCertificate");
-      console.log("certificates: "+this.certificates);
+      console.log("certificates: " + this.certificates);
       console.log(this.certificates);
+      var self = this;
 
-      axios.post("https://tender-backend.fishlab.com.tw/createCertificateMuti", {
+      axios
+        .post("http://127.0.0.1:3000/createCertificateMuti", {
           data: this.certificates,
-
         })
         .then(function (response) {
-          console.log("resp: "+response)
-          console.log(response)
-          this.$emit("close");
-          // let newState = {};
-          // Object.keys(this.certificates).forEach(key => {
-          //   newState[key] = null; // or = initialState[key]
-          //   });
-          //   this.$store.replaceState(newState);
+          console.log("resp: " + response);
+          console.log(response);
+          self.$emit("close");
 
-        }).catch(err => {
-          console.log("err")
-          console.log(err);
+          self.$router.go(0);
         })
+        .catch((err) => {
+          console.log("err");
+          console.log(err);
+        });
 
-// 使用多重迴圈的方式，已棄用
+      // 使用多重迴圈的方式，已棄用
       // for (
       //   let index = 0;
       //   index < Object.keys(this.certificates).length ;
@@ -65,15 +70,15 @@ export default {
       //   console.log("element: "+element);
       //   console.log(element);
       //   console.log(element);
-        // console.log(element.tendersID)
+      // console.log(element.tendersID)
       //   axios.post("http://127.0.0.1:3000/createCertificate", {
-          // tenderid: element.tendersID,
-          // accountCode: element.code,
-          // account: element.account,     
-          // name: element.name,
-          // currency: element.accountCurrecy,
-          // branch: element.branchName,
-          // amount: element.amount,
+      // tenderid: element.tendersID,
+      // accountCode: element.code,
+      // account: element.account,
+      // name: element.name,
+      // currency: element.accountCurrecy,
+      // branch: element.branchName,
+      // amount: element.amount,
 
       //   })
       //   .then(function (response) {
@@ -84,8 +89,10 @@ export default {
       //     console.log(err);
       //   })
       // }
-
-    }
+    },
+    closeTheDialog() {
+      this.$emit("close");
+    },
   },
 };
 </script>
