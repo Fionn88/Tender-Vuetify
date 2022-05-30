@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import TenderSelect from '../views/TenderSelect.vue'
 import TenderDetail from '../views/TenderDetail.vue'
 import CertificateSelect from '../views/CertificateSelect.vue'
+import CertificateRevoke from '../views/CertificateRevoke.vue'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,12 @@ const routes = [
     props: true,
     component: CertificateSelect
 
+  },
+  {
+    path: '/CertificateRevoke',
+    name: 'CertificateRevoke',
+    props: true,
+    component: CertificateRevoke    
   },
   {
     path: '/about',

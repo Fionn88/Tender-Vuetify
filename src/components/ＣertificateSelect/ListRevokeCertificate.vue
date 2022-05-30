@@ -17,15 +17,6 @@
               >View Certificate details</b-button
             >
           </b-col>
-
-          <b-col sm>
-            <b-button
-              variant="outline-danger"
-              v-on:click="revokeClick(certificate)"
-            >
-              Release Certificate</b-button
-            >
-          </b-col>
         </v-row>
       </b-card>
       <v-expand-transition>
@@ -76,11 +67,6 @@
         </v-card>
       </v-expand-transition>
     </b-card-group>
-    <dialog-revoke-certificate
-      v-if="dialogs.revoke"
-      @close="dialogs.revoke = false"
-      :currentItem="currentItem"
-    />
   </b-container>
 </template>
 
@@ -91,9 +77,6 @@ export default {
     return {
       certificates: [],
       reveal: false,
-      dialogs: {
-        revoke: false,
-      },
       currentItem: {
         id: "",
         accountCode: "",
@@ -111,18 +94,12 @@ export default {
   methods: {
     showDetail(item) {
       this.reveal = true;
-      console.log("shoeDetail()");
-      this.currentItem = item;
-    },
-    revokeClick(item) {
-      this.dialogs.revoke = true;
-      console.log("this.dialogs.revoke: " + this.dialogs.revoke);
       this.currentItem = item;
     },
   },
   mounted() {
     axios
-      .get("http://127.0.0.1:3000/certificateValid", {})
+      .get("http://127.0.0.1:3000/certificateRevoke", {})
       .then((resp) => {
         console.log(resp);
         this.certificates = resp.data.certificate;
@@ -131,19 +108,8 @@ export default {
         console.log(err);
       });
   },
-  components: {
-    "dialog-revoke-certificate":
-      require("@/components/ＣertificateSelect/Dialog/DialogRevokeCertificate.vue")
-        .default,
-  },
 };
 </script>
 
 <style>
-.v-card--reveal {
-  bottom: 0;
-  opacity: 1 !important;
-  position: absolute;
-  width: 100%;
-}
 </style>
