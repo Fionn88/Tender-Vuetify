@@ -1,5 +1,9 @@
 # vuetify-tender
 
+## 介紹
+
+標金FinTech解決方案 - 前端
+
 ## Project setup
 ```
 npm install
